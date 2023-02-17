@@ -7,11 +7,33 @@ body {
 #startScreen {
   display: flex;
   flex-flow: column nowrap;
+  align-items: center;
+  width: 50%;
+  text-align: center;
+  margin-top: calc(100vh / 2 - 50vh / 2);
+  margin-left: calc((100% - 50%) - 50% / 2);
+}
+
+#startScreen * {
+  margin-bottom: 20px;
+}
+
+#startScreen h3 {
+  font-size: 30px;
+}
+
+#startScreen p {
+  color: rgb(157, 154, 154);
+}
+
+#quizScreen {
+  display: flex;
+  flex-flow: column nowrap;
   height: inherit;
   width: inherit;
 }
 
-#startScreenHeader {
+#quizScreenHeader {
   padding: 20px;
 }
 
@@ -20,28 +42,29 @@ a:hover {
   text-decoration: underline;
 }
 
+#quizBody,
 #resultScreen {
-  visibility: hidden;
-}
-
-#quizBody {
   display: flex;
   flex-flow: column nowrap;
   justify-self: center;
   align-self: center;
 }
 
-#quizBody * {
+#quizBody *,
+#resultBody * {
   margin-top: 30px;
 }
 
-#quizTitle {
+.title {
   font-weight: bold;
   font-size: 20px;
 }
 
-#quizChoices {
-  background-color: rgb(95, 47, 95);
+#quizChoices,
+#goBackBtn,
+#clearScoresBtn,
+#startQuizBtn {
+  background-color: rgb(95, 34, 95);
   color: white;
   border-radius: 5px;
   padding: 5px;
@@ -49,7 +72,8 @@ a:hover {
   width: fit-content;
 }
 
-#quizChoices:hover {
+#quizChoices:hover,
+#saveInitialsBtn:hover {
   background-color: rgb(159, 94, 159);
 }
 
@@ -60,21 +84,35 @@ a:hover {
   padding: 10px;
 }
 
+#resultScreen {
+  align-items: center;
+}
+
+#saveInitialsBtn {
+  background-color: rgb(95, 34, 95);
+  color: white;
+  border-radius: 5px;
+  padding: 5px;
+  width: fit-content;
+  font-size: 12px;
+}
+
 @media screen and (min-width: 280px) {
-  #startScreenHeader {
+  #quizScreenHeader {
     display: flex;
     flex-flow: column nowrap;
   }
   #timer {
     margin-top: 10px;
   }
-  #quizBody {
+  #quizBody,
+  #resultScreen {
     width: 80%;
   }
 }
 
 @media screen and (min-width: 481px) {
-  #startScreenHeader {
+  #quizScreenHeader {
     display: flex;
     flex-flow: row wrap;
     justify-content: space-between;
@@ -82,7 +120,16 @@ a:hover {
   #timer {
     margin-top: 0;
   }
-  #quizBody {
+  #quizBody,
+  #resultScreen {
     width: 50%;
   }
+}
+
+#resultScreen {
+  display: none;
+}
+
+#quizScreen {
+  display: none;
 }
