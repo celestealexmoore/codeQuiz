@@ -1,0 +1,24 @@
+#highscoresInnerContent {
+  width: 300px;
+  display: flex;
+  flex-flow: column nowrap;
+  padding: 30px;
+  margin-top: 50px;
+  margin-left: calc((100% - 50%) - 300px / 2);
+}
+
+#highscoresInnerContent * {
+  margin-top: 15px;
+}
+
+#highScores {
+  font-size: 25px;
+}
+
+#goBackBtn {
+  margin-right: 10px;
+}
+
+#goBackBtn:hover {
+  text-decoration: none;
+}
