@@ -3,7 +3,7 @@ body {
   height: 100vh;
   font-family: sans-serif;
 }
-
+/* Start Screen */
 #startScreen {
   display: flex;
   flex-flow: column nowrap;
@@ -25,7 +25,7 @@ body {
 #startScreen p {
   color: rgb(157, 154, 154);
 }
-
+/* Quiz Screen */
 #quizScreen {
   display: flex;
   flex-flow: column nowrap;
@@ -126,10 +126,14 @@ a:hover {
   }
 }
 
+#startScreen {
+  display: none;
+}
+
 #resultScreen {
   display: none;
 }
 
-#quizScreen {
+/* #quizScreen {
   display: none;
-}
+} */
