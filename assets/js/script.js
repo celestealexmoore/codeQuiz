@@ -1,15 +1,32 @@
 import { quizQuestions } from "./questions.js";
+const startScreen = document.getElementById("startScreen");
+const startQuizBtn = document.getElementById("startQuizBtn");
+const quizScreen = document.getElementById("quizScreen");
+const timer = document.getElementById("timer");
+const quizQuestion = document.getElementById("quizQuestion");
+const quizChoices = document.getElementById("quizChoices");
+const indResult = document.getElementById("indResult");
+const resultScreen = document.getElementById("resultScreen");
 
-const quizQuestion = document.getElementById('quizQuestion')
-const quizChoices = document.getElementById('quizChoices')
-const indResult = document.getElementById('indResult')
+let countdown = 5;
+let timerVar;
 
+quizScreen.style.display = "none";
+resultScreen.style.display = "none";
+
+startQuizBtn.onclick = () => {
+  startScreen.style.display = "none";
+  quizScreen.style.display = "flex";
+ timerVar = setInterval(timerElapse, 1000);
+};
+
+/* timer function: */
+function timerElapse() {
+  timer.innerText = countdown--;
+  countdown === -1 ? clearInterval(timerVar) : null;
+}
 
 /* 
-
-create another HTML with same header.
-"Press Start button when you're ready to begin the quiz."
-[start button]
 
 startButton on click:
 
