@@ -50,9 +50,12 @@ a:hover {
   align-self: center;
 }
 
-#quizBody *,
-#resultBody * {
+#quizBody, #resultBody *, #indResult {
   margin-top: 30px;
+}
+
+#quizQuestion {
+  margin-bottom: 30px;
 }
 
 .title {
@@ -60,7 +63,18 @@ a:hover {
   font-size: 20px;
 }
 
-#quizChoices,
+#answerChoicesParent {
+  display: flex;
+  flex-flow: column nowrap;
+  margin-bottom: 0;
+  padding: 0;
+}
+
+#answerChoicesParent * {
+  margin-bottom: 3px;
+}
+
+.quizChoices,
 #goBackBtn,
 #clearScoresBtn,
 #startQuizBtn {
@@ -72,9 +86,9 @@ a:hover {
   width: fit-content;
 }
 
-#quizChoices:hover,
+.quizChoices:hover,
 #saveInitialsBtn:hover {
-  background-color: rgb(159, 94, 159);
+  background-color: rgb(141, 99, 141) !important;
 }
 
 #indResult {
