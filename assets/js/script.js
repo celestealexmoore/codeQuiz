@@ -7,9 +7,14 @@ const quizQuestion = document.getElementById("quizQuestion");
 const answerChoicesParent = document.getElementById("answerChoicesParent");
 const indResult = document.getElementById("indResult");
 const resultScreen = document.getElementById("resultScreen");
-
+const a = document.getElementById("1");
+const b = document.getElementById("2");
+const c = document.getElementById("3");
+const d = document.getElementById("4");
 let countdown = 60;
+let i = 0;
 let timerVar;
+let score = 0;
 
 quizScreen.style.display = "none";
 resultScreen.style.display = "none";
@@ -18,63 +23,49 @@ startQuizBtn.onclick = () => {
   startScreen.style.display = "none";
   quizScreen.style.display = "flex";
   timerVar = setInterval(timerElapse, 1000);
-  newQuestion();
+  newQuestion(i);
 };
 
 /* timer function: */
-let timerElapse = () => {
+const timerElapse = () => {
   timer.innerText = countdown--;
 
-  if (countdown === -1) {
-    clearInterval(timerVar),
-      (quizBody.style.display = "none"),
-      (resultScreen.style.display = "flex");
+  if (countdown <= -1) {
+    clearInterval(timerVar);
+    timer.innerText = 0;
+    quizBody.style.display = "none";
+    resultScreen.style.display = "flex";
   }
 };
 
-let newQuestion = () => {
-  let a, b, c, d;
-  let i = 0;
+const newQuestion = (i) => {
+  // Question Title
+  quizQuestion.innerHTML = quizQuestions[i].question;
 
-  for (i = i; i < 1; i++) {
-    // console.log(i);
-    // Question Title
-    quizQuestion.innerHTML = quizQuestions[i].question;
+  //Answer Buttons
+  a.innerHTML = quizQuestions[i].answers[0];
+  b.innerHTML = quizQuestions[i].answers[1];
+  c.innerHTML = quizQuestions[i].answers[2];
+  d.innerHTML = quizQuestions[i].answers[3];
 
-    //Answer Buttons
-    a = document.createElement("button");
-    a.innerHTML = quizQuestions[i].answers[0];
-    b = document.createElement("button");
-    b.innerHTML = quizQuestions[i].answers[1];
-    c = document.createElement("button");
-    c.innerHTML = quizQuestions[i].answers[2];
-    d = document.createElement("button");
-    d.innerHTML = quizQuestions[i].answers[3];
-
-    answerChoicesParent.append(a, b, c, d);
-
-    let children = answerChoicesParent.childNodes;
-    children.forEach((child) => {
-      child.classList.add("quizChoices");
-      child.setAttribute("type", "submit");
-      child.setAttribute("id", i++);
-      child.addEventListener("click", function () {
-        if (child.id == quizQuestions[0].correctAnswer) {
-          indResult.innerText = "That's Correct!";
-          //   i += 1;
-          //   newQuestion()
-        } else {
-          indResult.innerText = "That's Incorrect.";
-          countdown = countdown - 10;
-          //   i += 1;
-        }
-      });
+  let children = answerChoicesParent.childNodes;
+  children.forEach((child) => {
+    child.addEventListener("click", function () {
+      if (child.id == quizQuestions[i].correctAnswer) {
+        indResult.innerText = "That's Correct!";
+        i++;
+        newQuestion(i);
+      } else {
+        indResult.innerText = "That's Incorrect.";
+        countdown -= 10;
+        i++;
+        newQuestion(i);
+      }
     });
-  }
+  });
 };
 
 /* 
-
 #saveInitialsBtn onclick should store #initialInputBox.value to local storage
 swap to highscores.html
 
@@ -84,6 +75,4 @@ button.addEventListener('click', function() {
 console.log('I just moved a page')
 window.location.href = "#your-url-here";
 });
-
-each time a question is answered and feedback provided, run quiz.
 */
