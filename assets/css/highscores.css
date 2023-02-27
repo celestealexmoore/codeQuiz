@@ -7,8 +7,8 @@
   margin-left: calc((100% - 50%) - 300px / 2);
 }
 
-#highscoresInnerContent * {
-  margin-top: 15px;
+#scoreResults, #scorePgLinks {
+  margin-top: 35px;
 }
 
 #highScores {
@@ -23,7 +23,11 @@
   text-decoration: none;
 }
 
-#pastScores:nth-child(odd) {
+.users {
+  list-style-type: none;
   padding: 5px;
-background-color: rgb(236, 215, 236);
+}
+
+.users:nth-child(odd) {
+  background-color: rgb(236, 215, 236);
 }

@@ -18,8 +18,8 @@ const d = document.getElementById("3");
 let countdown = 60;
 let i = 0;
 let score = 0;
-let feedback;
 let timerVar;
+let feedback;
 
 quizScreen.style.display = "none";
 resultScreen.style.display = "none";
@@ -83,8 +83,16 @@ saveInitialsBtn.onclick = () => {
   if (initialInputBox.value === "") {
     alert("Please enter your initials.");
   } else {
-    localStorage.setItem("username", initialInputBox.value);
-    localStorage.setItem("scoreIs", score);
+    let highscores = JSON.parse(localStorage.getItem("highscores")) || [];
+
+    const newScore = {
+      name: initialInputBox.value,
+      score: score,
+    };
+
+    highscores.push(newScore);
+    localStorage.setItem("highscores", JSON.stringify(highscores));
+
     //switch to highscores.html
     window.location.href = "../../highscores.html";
   }
