@@ -7,14 +7,19 @@ const quizQuestion = document.getElementById("quizQuestion");
 const answerChoicesParent = document.getElementById("answerChoicesParent");
 const indResult = document.getElementById("indResult");
 const resultScreen = document.getElementById("resultScreen");
+const finalScoreEl = document.getElementById("finalScoreEl");
+const initialInputBox = document.getElementById("initialInputBox");
+const saveInitialsBtn = document.getElementById("saveInitialsBtn");
 const a = document.getElementById("0");
 const b = document.getElementById("1");
 const c = document.getElementById("2");
 const d = document.getElementById("3");
+
 let countdown = 60;
 let i = 0;
-let timerVar;
 let score = 0;
+let feedback;
+let timerVar;
 
 quizScreen.style.display = "none";
 resultScreen.style.display = "none";
@@ -29,50 +34,58 @@ startQuizBtn.onclick = () => {
 /* timer function: */
 const timerElapse = () => {
   timer.innerText = countdown--;
-
-  if (countdown <= -1) {
-    clearInterval(timerVar);
-    timer.innerText = 0;
-    quizBody.style.display = "none";
-    resultScreen.style.display = "flex";
-  }
+  countdown <= -1 ? endQuiz() : null;
 };
 
 const newQuestion = (i) => {
   // Question Title
-  quizQuestion.innerHTML = quizQuestions[i].question;
-
+  quizQuestion.innerHTML = i + 1 + ". " + quizQuestions[i].question;
   //Answer Buttons
   a.innerHTML = quizQuestions[i].answers[0];
   b.innerHTML = quizQuestions[i].answers[1];
   c.innerHTML = quizQuestions[i].answers[2];
   d.innerHTML = quizQuestions[i].answers[3];
 
+  questionClick();
+};
+
+const questionClick = () => {
   let children = answerChoicesParent.childNodes;
   children.forEach((child) => {
-    child.addEventListener("click", function () {
+    child.onclick = function () {
       if (child.id == quizQuestions[i].correctAnswer) {
         indResult.innerText = "That's Correct!";
         i++;
-        newQuestion(i);
+        score += 10;
+        i < 9 ? newQuestion(i) : endQuiz();
       } else {
         indResult.innerText = "That's Incorrect.";
         countdown -= 10;
         i++;
         newQuestion(i);
       }
-    });
+    };
   });
+  feedback = setTimeout(function () {
+    indResult.innerText = "";
+  }, 500);
 };
 
-/* 
-#saveInitialsBtn onclick should store #initialInputBox.value to local storage
-swap to highscores.html
+const endQuiz = () => {
+  clearInterval(timerVar);
+  timer.innerText = 0;
+  quizBody.style.display = "none";
+  resultScreen.style.display = "flex";
+  finalScoreEl.innerHTML = "Your Final Score Is: " + score;
+};
 
-Example of swapping HTMLs:
-var button = document.getElementById("button1");
-button.addEventListener('click', function() {
-console.log('I just moved a page')
-window.location.href = "#your-url-here";
-});
-*/
+saveInitialsBtn.onclick = () => {
+  if (initialInputBox.value === "") {
+    alert("Please enter your initials.");
+  } else {
+    localStorage.setItem("username", initialInputBox.value);
+    localStorage.setItem("scoreIs", score);
+    //switch to highscores.html
+    window.location.href = "../../highscores.html";
+  }
+};

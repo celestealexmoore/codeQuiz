@@ -22,3 +22,8 @@
 #goBackBtn:hover {
   text-decoration: none;
 }
+
+#pastScores:nth-child(odd) {
+  padding: 5px;
+background-color: rgb(236, 215, 236);
+}
