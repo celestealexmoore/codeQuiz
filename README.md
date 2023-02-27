@@ -22,10 +22,7 @@
 
 ## Media
 
-![photo](./assets/images/pic1.png)
-![photo](./assets/images/pic2.png)
-![photo](./assets/images/pic3.png)
-![photo](./assets/images/pic4.png)
+![photo](./assets/images/siteGif.gif)
 
 ## Features
 
